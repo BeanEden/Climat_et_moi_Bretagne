@@ -1,0 +1,73 @@
+{
+  "indicateurs": [
+    "TMm_yr",
+    "TMm_seas_JJA",
+    "TMm_seas_DJF",
+    "TXm_seas_JJA",
+    "TX35D_yr",
+    "TX30D_yr",
+    "TR_yr",
+    "RR_yr",
+    "RR_seas_JJA",
+    "RR_seas_DJF",
+    "RRq99_yr",
+    "Rx1d_yr",
+    "RRq99refD_yr",
+    "IFM40_yr",
+    "SWI04_yr"
+  ],
+  "labels": {
+    "TMm_yr": "Température moyenne annuelle (°C)",
+    "TMm_seas_JJA": "Température moyenne été (°C)",
+    "TMm_seas_DJF": "Température moyenne hiver (°C)",
+    "TXm_seas_JJA": "Température maximale été (°C)",
+    "TX35D_yr": "Jours Tx >= 35°C (j)",
+    "TX30D_yr": "Jours Tx >= 30°C (j)",
+    "TR_yr": "Nuits tropicales (j)",
+    "RR_yr": "Précipitations annuelles (mm)",
+    "RR_seas_JJA": "Précipitations été (mm)",
+    "RR_seas_DJF": "Précipitations hiver (mm)",
+    "RRq99_yr": "Précip. remarquables P99 (mm)",
+    "Rx1d_yr": "Précip. extrêmes max annuel (mm)",
+    "RRq99refD_yr": "Fréquence précip. remarquables (j)",
+    "IFM40_yr": "Indicateur feux météo > 40 (j)",
+    "SWI04_yr": "Jours SWI < 0.4 (j)"
+  },
+  "categories": {
+    "Température": [
+      "TMm_yr",
+      "TMm_seas_JJA",
+      "TMm_seas_DJF",
+      "TXm_seas_JJA"
+    ],
+    "Chaleur extrême": [
+      "TX35D_yr",
+      "TX30D_yr",
+      "TR_yr"
+    ],
+    "Précipitations": [
+      "RR_yr",
+      "RR_seas_JJA",
+      "RR_seas_DJF",
+      "RRq99_yr",
+      "Rx1d_yr",
+      "RRq99refD_yr"
+    ],
+    "Risques": [
+      "IFM40_yr",
+      "SWI04_yr"
+    ]
+  },
+  "scenarios": {
+    "REF": "1976-2005",
+    "GWL15": "2037-2056",
+    "GWL20": "2052-2071",
+    "GWL30": "2079-2098"
+  },
+  "periodes": [
+    "1976-2005",
+    "2037-2056",
+    "2052-2071",
+    "2079-2098"
+  ]
+}

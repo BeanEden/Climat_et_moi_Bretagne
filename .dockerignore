@@ -1,0 +1,14 @@
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+.git/
+.gitignore
+.dockerignore
+.vscode/
+.idea/
+.env
+data/predictions/models/
+data/predictions/images/
+tracc_prediction.ipynb

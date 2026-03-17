@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% block title %}Comparateur Climatique — Bretagne{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<div class="comparateur-layout">
+
+  <!-- ========================================== -->
+  <!-- SECTION 1 : Comparatif Spécifique (1 Ind.) -->
+  <!-- ========================================== -->
+  <section class="comp-section">
+    <div class="comp-header">
+      <div class="comp-title">🔍 Comparatif Détaillé par Indicateur</div>
+    </div>
+
+    <!-- Contrôles Section 1 -->
+    <div class="comp-controls" style="margin-bottom: 1.5rem;">
+      <div class="ctrl-group" style="flex:1; min-width: 250px;">
+        <label class="ctrl-label">Sélectionner l'indicateur</label>
+        <select id="spec-ind" class="comp-select">
+          {% for cat, inds in meta.categories.items() %}
+          <optgroup label="{{ cat }}">
+            {% for ind in inds %}
+            <option value="{{ ind }}" {% if ind=='TMm_yr' %}selected{% endif %}>{{ meta.labels[ind] }}</option>
+            {% endfor %}
+          </optgroup>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="ctrl-group">
+        <label class="ctrl-label">Mode de Comparaison</label>
+        <div class="switch-mode">
+          <button id="btn-mode-annee" class="switch-btn active" onclick="setMode('annee')">Année vs Année</button>
+          <button id="btn-mode-periode" class="switch-btn" onclick="setMode('periode')">Période vs Période</button>
+        </div>
+      </div>
+
+      <!-- Inputs Années (Affiche/Masque JS) -->
+      <div id="inputs-annee" style="display:flex; gap:1rem;">
+        <div class="ctrl-group">
+          <label class="ctrl-label">Année 1</label>
+          <select id="spec-a1" class="comp-select">
+            {% for a in annees_disponibles %}
+              <option value="{{ a }}" {% if a=='1990' %}selected{% endif %}>{{ a }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="ctrl-group">
+          <label class="ctrl-label">Année 2</label>
+          <select id="spec-a2" class="comp-select">
+            {% for a in annees_disponibles %}
+              <option value="{{ a }}" {% if a=='2050' %}selected{% endif %}>{{ a }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <!-- Inputs Périodes (Affiche/Masque JS) -->
+      <div id="inputs-periode" style="display:none; gap:1rem;">
+        <div class="ctrl-group">
+          <label class="ctrl-label">Décennie 1</label>
+          <select id="spec-p1" class="comp-select">
+            <option value="1980" selected>1980 - 1989</option>
+            <option value="1990">1990 - 1999</option>
+            <option value="2000">2000 - 2009</option>
+            <option value="2010">2010 - 2019</option>
+            <option value="2020">2020 - 2029</option>
+            <option value="2030">2030 - 2039</option>
+            <option value="2040">2040 - 2049</option>
+            <option value="2050">2050 - 2059</option>
+          </select>
+        </div>
+        <div class="ctrl-group">
+          <label class="ctrl-label">Décennie 2</label>
+          <select id="spec-p2" class="comp-select">
+            <option value="2020">2020 - 2029</option>
+            <option value="2030">2030 - 2039</option>
+            <option value="2040">2040 - 2049</option>
+            <option value="2050" selected>2050 - 2059</option>
+            <option value="2060">2060 - 2069</option>
+            <option value="2070">2070 - 2079</option>
+            <option value="2080">2080 - 2089</option>
+            <option value="2090">2090 - 2099</option>
+          </select>
+        </div>
+      </div>
+    </div> <!-- Fin controls -->
+
+    <!-- KPIs -->
+    <div class="comp-kpis">
+      <div class="kpi-card">
+        <div class="ctrl-label" id="lbl-val1">Valeur 1</div>
+        <div class="kpi-val" id="kpi-val1">-</div>
+        <div style="font-size:0.8rem; color:var(--c-muted);" id="kpi-unit1"></div>
+      </div>
+      <div class="kpi-card">
+        <div class="ctrl-label" id="lbl-val2">Valeur 2</div>
+        <div class="kpi-val" id="kpi-val2">-</div>
+        <div style="font-size:0.8rem; color:var(--c-muted);" id="kpi-unit2"></div>
+      </div>
+      <div class="kpi-card" style="background:#eef4f8;">
+        <div class="ctrl-label">Écart Absolu</div>
+        <div class="kpi-val kpi-delta" id="kpi-ecart-abs">-</div>
+      </div>
+      <div class="kpi-card" style="background:#eef4f8;">
+        <div class="ctrl-label">Évolution (%)</div>
+        <div class="kpi-val kpi-delta" id="kpi-ecart-rel">-</div>
+      </div>
+    </div>
+
+    <!-- Chart -->
+    <div class="chart-wrapper">
+      <canvas id="spec-chart"></canvas>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- SECTION 2 : Comparatif Global (Tous Ind.)  -->
+  <!-- ========================================== -->
+  <section class="comp-section">
+    <div class="comp-header">
+      <div class="comp-title">🌍 Vision Globale (Sélecteur de décennies)</div>
+    </div>
+
+    <!-- Contrôles Section 2 -->
+    <div class="comp-controls" style="margin-bottom: 1.5rem;">
+      <div class="ctrl-group">
+        <label class="ctrl-label">Décennie de Référence</label>
+        <select id="glob-p1" class="comp-select">
+          <option value="1980" selected>1980 - 1989</option>
+          <option value="1990">1990 - 1999</option>
+          <option value="2000">2000 - 2009</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label class="ctrl-label">Décennie Cible (Projection)</label>
+        <select id="glob-p2" class="comp-select">
+          <option value="2030">2030 - 2039</option>
+          <option value="2040">2040 - 2049</option>
+          <option value="2050" selected>2050 - 2059</option>
+          <option value="2080">2080 - 2089</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="comp-grid-2">
+      <!-- Radar -->
+      <div>
+        <h4 style="text-align:center; font-family:var(--font-head); margin-bottom:1rem; color:var(--c-dark);">
+          Empreinte Globale (% d'évolution)
+        </h4>
+        <div class="chart-wrapper-radar">
+          <canvas id="glob-radar-chart"></canvas>
+        </div>
+      </div>
+      
+      <!-- Histogramme groupé -->
+      <div>
+        <h4 style="text-align:center; font-family:var(--font-head); margin-bottom:1rem; color:var(--c-dark);">
+          Comparaison Absolue (Valeurs Moyennes)
+        </h4>
+        <div class="chart-wrapper">
+          <canvas id="glob-bar-chart"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/comparateur.js') }}?v=1"></script>
+{% endblock %}

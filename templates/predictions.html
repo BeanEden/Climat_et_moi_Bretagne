@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}Prédictions ML 2100 — Climat Bretagne{% endblock %}
+
+{% block content %}
+<div class="dashboard-layout">
+
+  <!-- Entête -->
+  <section class="comp-section">
+    <div class="comp-header" style="border-bottom: none; margin-bottom: 0; padding-bottom: 0;">
+      <div>
+        <div class="comp-title">📈 Projections ML à l'horizon 2100</div>
+        <p style="color:var(--c-muted); margin-top:0.5rem; font-size:0.9rem;">
+          Exploration algorithmique des futurs climatiques de la Bretagne selon 3 scénarios (Optimiste, Régulière, Pessimiste).
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Panneau de Contrôle & KPIs 2100 -->
+  <section class="comp-section">
+    
+    <!-- Contrôles -->
+    <div class="comp-controls" style="margin-bottom: 2rem;">
+      <div class="ctrl-group">
+        <label class="ctrl-label">Catégorie</label>
+        <select id="sel-categorie" class="comp-select">
+          {% for cat in meta.categories.keys() %}
+          <option value="{{ cat }}">{{ cat }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="ctrl-group" style="flex:1;">
+        <label class="ctrl-label">Indicateur à projeter</label>
+        <select id="sel-indicateur" class="comp-select" style="width: 100%; max-width: 400px;"></select>
+      </div>
+    </div>
+
+    <!-- 3 Cartes KPI projetant l'année 2100 avec écart 2026 -->
+    <div class="comp-kpis" id="pred-kpis">
+      <div class="kpi-card" style="border-top: 4px solid var(--c-gwl15);">
+        <div class="ctrl-label">Hypothèse Optimiste (2100)</div>
+        <div class="kpi-val" id="val-opt">—</div>
+        <div class="kpi-delta" id="delta-opt" style="font-size:0.9rem; margin-top:0.5rem; font-weight:600;">—</div>
+      </div>
+      <div class="kpi-card" style="border-top: 4px solid var(--c-gwl20);">
+        <div class="ctrl-label">Tendance Régulière (2100)</div>
+        <div class="kpi-val" id="val-reg">—</div>
+        <div class="kpi-delta" id="delta-reg" style="font-size:0.9rem; margin-top:0.5rem; font-weight:600;">—</div>
+      </div>
+      <div class="kpi-card" style="border-top: 4px solid var(--c-gwl30);">
+        <div class="ctrl-label">Hypothèse Pessimiste (2100)</div>
+        <div class="kpi-val" id="val-pes">—</div>
+        <div class="kpi-delta" id="delta-pes" style="font-size:0.9rem; margin-top:0.5rem; font-weight:600;">—</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Graphique Principal (Courbes multiples) -->
+  <section class="comp-section" style="flex: 1; display: flex; flex-direction: column;">
+    <div class="comp-header">
+      <div class="comp-title" id="chart-title">Évolution projetée (2006 - 2100)</div>
+    </div>
+    <div class="chart-wrapper" style="flex: 1; min-height: 400px;">
+      <canvas id="chart-predictions"></canvas>
+    </div>
+  </section>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  window.APP_META = {{ meta | tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/predictions.js') }}?v=4"></script>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %}Statistiques — Climat Bretagne{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Statistiques</h1>
+  <p>Distributions, corrélations et profils par scénario climatique</p>
+</div>
+
+<div class="layout-with-controls" style="flex:1;">
+
+  <aside class="controls-panel comp-section" style="padding: 1.5rem; background: var(--c-bg); border: 1px solid var(--c-border); box-shadow: none;">
+    <div class="ctrl-group" style="margin-bottom: 1rem;">
+      <label class="ctrl-label">Catégorie</label>
+      <select id="sel-categorie" class="comp-select">
+        {% for cat in meta.categories.keys() %}
+        <option value="{{ cat }}">{{ cat }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="ctrl-group" style="margin-bottom: 1rem;">
+      <label class="ctrl-label">Indicateur</label>
+      <select id="sel-indicateur" class="comp-select"></select>
+    </div>
+    <div class="control-group">
+      <label class="control-label">Scénarios</label>
+      <div class="checkbox-group">
+        {% for niv, label in [('REF','Référence'),('GWL15','+1.5°C'),('GWL20','+2°C'),('GWL30','+3°C')] %}
+        <label class="checkbox-label">
+          <input type="checkbox" name="scenario" value="{{ niv }}" checked>
+          <span class="checkbox-dot" style="background:var(--c-{{ niv|lower }});"></span>
+          {{ label }}
+        </label>
+        {% endfor %}
+      </div>
+    </div>
+  </aside>
+
+  <div class="content-area">
+
+    <!-- Onglets -->
+    <div class="switch-mode" style="margin-bottom: 1.5rem; display: inline-flex;">
+      <button class="switch-btn active" data-tab="boxplot">Boxplots</button>
+      <button class="switch-btn" data-tab="histo">Distribution</button>
+      <button class="switch-btn" data-tab="stats">Tableau</button>
+    </div>
+
+    <div id="tab-boxplot" class="tab-panel active">
+      <div class="comp-section chart-container" style="min-height:380px;">
+        <div class="comp-title" id="bp-title">Distribution par scénario</div>
+        <div style="position:relative; flex:1; min-height:300px; margin-top: 1rem;">
+          <canvas id="chart-boxplot"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-histo" class="tab-panel">
+      <div class="comp-section chart-container" style="min-height:380px;">
+        <div class="comp-title">Histogramme / densité</div>
+        <div style="position:relative; flex:1; min-height:300px; margin-top: 1rem;">
+          <canvas id="chart-histo"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-stats" class="tab-panel">
+      <div class="comp-section card">
+        <div class="comp-title" style="margin-bottom:1.5rem;">Statistiques descriptives</div>
+        <table class="data-table" id="table-stats">
+          <thead>
+            <tr>
+              <th>Scénario</th>
+              <th>N</th>
+              <th>Moyenne</th>
+              <th>Médiane</th>
+              <th>Éc. type</th>
+              <th>Min</th>
+              <th>Max</th>
+              <th>P10</th>
+              <th>P90</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-stats"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>window.APP_META = {{ meta | tojson }};</script>
+<script src="{{ url_for('static', filename='js/statistiques.js') }}?v=5"></script>
+{% endblock %}

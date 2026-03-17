@@ -1,0 +1,44 @@
+[
+  {
+    "Risque Climatique":"🔥 Feu de forêt",
+    "Signal \/ Alerte":"Fumée, odeur, FR-Alert",
+    "Action Prioritaire (Le bon réflexe)":"S'enfermer dans une maison en dur. Arroser les abords si possible.",
+    "Ce qu'il faut ABSOLUMENT éviter":"Fuir en voiture au dernier moment (danger de mort)."
+  },
+  {
+    "Risque Climatique":"🌊 Inondation",
+    "Signal \/ Alerte":"Pluie intense, montée des eaux",
+    "Action Prioritaire (Le bon réflexe)":"Monter dans les étages. Couper électricité et gaz.",
+    "Ce qu'il faut ABSOLUMENT éviter":"Prendre sa voiture ou descendre dans un parking\/sous-sol."
+  },
+  {
+    "Risque Climatique":"🌪️ Tempête \/ Vent",
+    "Signal \/ Alerte":"Vigilance Orange\/Rouge",
+    "Action Prioritaire (Le bon réflexe)":"Rester à l'intérieur. Ranger les objets volants.",
+    "Ce qu'il faut ABSOLUMENT éviter":"Monter sur le toit ou s'abriter sous un arbre."
+  },
+  {
+    "Risque Climatique":"⚡ Orage \/ Grêle",
+    "Signal \/ Alerte":"Tonnerre, ciel noir",
+    "Action Prioritaire (Le bon réflexe)":"S'abriter dans un bâtiment. Débrancher l'électronique.",
+    "Ce qu'il faut ABSOLUMENT éviter":"Rester près d'un point d'eau ou porter un parapluie ouvert."
+  },
+  {
+    "Risque Climatique":"☀️ Canicule",
+    "Signal \/ Alerte":"Températures élevées",
+    "Action Prioritaire (Le bon réflexe)":"Mouiller son corps, boire. Fermer les volets le jour.",
+    "Ce qu'il faut ABSOLUMENT éviter":"Faire des efforts physiques intenses en plein soleil."
+  },
+  {
+    "Risque Climatique":"❄️ Grand Froid",
+    "Signal \/ Alerte":"Températures négatives",
+    "Action Prioritaire (Le bon réflexe)":"Couvrir tête et mains. Chauffer sans boucher les aérations.",
+    "Ce qu'il faut ABSOLUMENT éviter":"Utiliser des chauffages d'appoint non prévus (risque CO (Monoxyde de Carbone))."
+  },
+  {
+    "Risque Climatique":"🌊 Submersion",
+    "Signal \/ Alerte":"Vent fort + Marée haute",
+    "Action Prioritaire (Le bon réflexe)":"S'éloigner des côtes et des digues. Monter en hauteur.",
+    "Ce qu'il faut ABSOLUMENT éviter":"Aller sur la plage pour regarder ou photographier les vagues."
+  }
+]

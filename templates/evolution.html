@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Evolution — Climat Bretagne{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Evolution des indicateurs</h1>
+  <p>Bretagne — Modèle TRACC2023 · CCLM4-8-17 / MPI-ESM</p>
+</div>
+
+<!-- Métriques rapides (injectées par JS) -->
+<div class="comp-kpis" id="metrics-row">
+  <div class="kpi-card" style="border-top: 4px solid var(--c-ref)">
+    <div class="ctrl-label">Référence 1976-2005</div>
+    <div class="kpi-val" id="m-ref">—</div>
+    <div class="kpi-delta delta-neu" id="d-ref">moyenne</div>
+  </div>
+  <div class="kpi-card" style="border-top: 4px solid var(--c-gwl15)">
+    <div class="ctrl-label">+1.5°C · 2037-2056</div>
+    <div class="kpi-val" id="m-gwl15">—</div>
+    <div class="kpi-delta" id="d-gwl15">—</div>
+  </div>
+  <div class="kpi-card" style="border-top: 4px solid var(--c-gwl20)">
+    <div class="ctrl-label">+2°C · 2052-2071</div>
+    <div class="kpi-val" id="m-gwl20">—</div>
+    <div class="kpi-delta" id="d-gwl20">—</div>
+  </div>
+  <div class="kpi-card" style="border-top: 4px solid var(--c-gwl30)">
+    <div class="ctrl-label">+3°C · 2079-2098</div>
+    <div class="kpi-val" id="m-gwl30">—</div>
+    <div class="kpi-delta" id="d-gwl30">—</div>
+  </div>
+</div>
+
+<div class="layout-with-controls" style="flex:1;">
+
+  <aside class="controls-panel comp-section" style="padding: 1.5rem; background: var(--c-bg); border: 1px solid var(--c-border); box-shadow: none;">
+    <div class="ctrl-group" style="margin-bottom: 1rem;">
+      <label class="ctrl-label">Catégorie</label>
+      <select id="sel-categorie" class="comp-select">
+        {% for cat in meta.categories.keys() %}
+        <option value="{{ cat }}">{{ cat }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="ctrl-group" style="margin-bottom: 1rem;">
+      <label class="ctrl-label">Indicateur</label>
+      <select id="sel-indicateur" class="comp-select"></select>
+    </div>
+    <div class="control-group">
+      <label class="control-label">Scénarios</label>
+      <div class="checkbox-group" id="checks-scenarios">
+        {% for niv, label in [('REF','Référence 1976-2005'),('GWL15','+1.5°C 2037-2056'),('GWL20','+2°C
+        2052-2071'),('GWL30','+3°C 2079-2098')] %}
+        <label class="checkbox-label">
+          <input type="checkbox" name="scenario" value="{{ niv }}" checked>
+          <span class="checkbox-dot" style="background:var(--c-{{ niv | lower }});"></span>
+          {{ label }}
+        </label>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="checkbox-label">
+        <input type="checkbox" id="chk-tendance" checked>
+        Tendance (moy. mobile 5 ans)
+      </label>
+    </div>
+  </aside>
+
+  <div class="content-area">
+    <div class="comp-section chart-container">
+      <div class="comp-title" id="chart-title">Température moyenne annuelle</div>
+      <div class="ctrl-label" id="chart-subtitle" style="margin-bottom: 1.5rem;">Moyenne territoriale Bretagne — 426 mailles</div>
+      <div style="position:relative; flex:1; min-height:320px;">
+        <canvas id="chart-evolution"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  window.APP_META = {{ meta | tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/evolution.js') }}?v=5"></script>
+{% endblock %}

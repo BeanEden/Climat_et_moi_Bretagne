@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% block title %}Carte DRIAS — Climat Bretagne{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>Carte DRIAS</h1>
+  <p>Heatmap des indicateurs climatiques par maille spatiale — Bretagne</p>
+</div>
+
+<div class="layout-with-controls" style="height:calc(100vh - 120px); overflow:hidden;">
+
+  <aside class="controls-panel">
+
+    <!-- Adresse -->
+    <div class="control-group">
+      <label class="control-label" style="display:flex; flex-direction:column; gap:4px;">
+        <span style="font-size:1.15rem; font-weight:800; color:var(--c-primary);">Quels sont mes impacts ?</span>
+        <span style="font-size:0.85rem; color:var(--c-muted); font-weight:500;">Saisissez votre adresse ci-dessous</span>
+      </label>
+      <div style="position:relative;">
+        <div style="display:flex;gap:.4rem;">
+          <input type="text" id="input-adresse" class="control-select" placeholder="ex : 18 rue de la Paix, Rennes"
+            autocomplete="off" style="flex:1;border-radius:6px 0 0 6px;">
+          <button id="btn-geocode" class="btn btn-primary"
+            style="border-radius:0 6px 6px 0;padding:.5rem .7rem;flex-shrink:0;" title="Localiser">&#9906;</button>
+        </div>
+        <ul id="adresse-suggestions" style="display:none;position:absolute;top:100%;left:0;right:0;
+                   background:white;border:1px solid var(--c-border);border-radius:0 0 8px 8px;
+                   margin:0;padding:0;list-style:none;z-index:2000;
+                   box-shadow:0 6px 20px rgba(0,0,0,.12);max-height:220px;overflow-y:auto;"></ul>
+      </div>
+      <div id="geocode-status" style="font-size:.72rem;color:var(--c-muted);min-height:1.1rem;margin-top:.3rem;"></div>
+    </div>
+
+    <div class="sidebar-divider" style="margin:.2rem 0;"></div>
+
+    <!-- Indicateur -->
+    <div class="control-group">
+      <label class="control-label">Indicateur</label>
+      <select id="sel-indicateur" class="control-select">
+        {% for cat, inds in meta.categories.items() %}
+        <optgroup label="{{ cat }}">
+          {% for ind in inds %}
+          <option value="{{ ind }}" {% if ind=='TMm_yr' %}selected{% endif %}>{{ meta.labels[ind] }}</option>
+          {% endfor %}
+        </optgroup>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Couche de fond -->
+    <div class="control-group">
+      <label class="control-label">Couche de fond</label>
+      <select id="sel-layer" class="control-select">
+        <option value="osm">OpenStreetMap</option>
+        <option value="topo" selected>OpenTopoMap</option>
+        <option value="carto">CartoDB Clair</option>
+        <option value="carto-dark">CartoDB Sombre</option>
+        <option value="satellite">ESRI Satellite</option>
+      </select>
+    </div>
+
+    <!-- Options heatmap -->
+    <div class="control-group">
+      <label class="control-label">Options heatmap</label>
+      <div style="display:flex;flex-direction:column;gap:.5rem;">
+        <label style="font-size:.78rem;">Rayon : <strong id="radius-val">18</strong> px</label>
+        <input type="range" class="slider" id="slider-radius" min="8" max="40" value="18" step="1">
+        <label style="font-size:.78rem;">Flou : <strong id="blur-val">15</strong> px</label>
+        <input type="range" class="slider" id="slider-blur" min="5" max="35" value="15" step="1">
+        <label style="font-size:.78rem;">Opacité : <strong id="opacity-val">0.85</strong></label>
+        <input type="range" class="slider" id="slider-opacity" min="0.3" max="1" value="0.85" step="0.05">
+      </div>
+    </div>
+
+    <!-- Année -->
+    <div class="control-group">
+      <label class="control-label">
+        Année : <span id="annee-val"
+          style="font-family:var(--font-head);font-size:1.4rem;font-weight:800;color:var(--c-dark);">1990</span>
+        <span id="annee-scenario" class="badge-scenario badge-REF"
+          style="font-size:.72rem;padding:.15rem .55rem;border-radius:20px;color:white;background:#2e7d9e;margin-left:.3rem;">REF</span>
+      </label>
+      <div class="slider-container">
+        <input type="range" class="slider" id="slider-annee" min="0" max="{{ annees_disponibles|length - 1 }}"
+          value="{{ annees_disponibles.index('1990') }}" step="1">
+        <div class="slider-bounds"><span>{{ annee_min }}</span><span>{{ annee_max }}</span></div>
+      </div>
+      <button id="btn-play" class="btn-play">&#9654; Animer</button>
+      <div style="display:flex;gap:.5rem;margin-top:.4rem;align-items:center;">
+        <label style="font-size:.72rem;color:var(--c-muted);">Vitesse :</label>
+        <select id="sel-speed" class="control-select" style="flex:1;">
+          <option value="1200">Lente</option>
+          <option value="700" selected>Normale</option>
+          <option value="350">Rapide</option>
+          <option value="150">Très rapide</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Légende -->
+    <div class="control-group">
+      <label class="control-label">Légende</label>
+      <div class="legende">
+        <div class="legende-gradient" id="legende-gradient"></div>
+        <div class="legende-labels">
+          <span id="legende-min">—</span>
+          <span id="legende-mid">—</span>
+          <span id="legende-max">—</span>
+        </div>
+        <div class="legende-unite" id="legende-unite"></div>
+      </div>
+    </div>
+
+    <!-- Survol -->
+    <div class="control-group" id="hover-section" style="display:none;">
+      <label class="control-label">Point sélectionné / survolé</label>
+      <div class="hover-info">
+        <div class="hover-value" id="hover-value" style="margin-bottom:.5rem;">—</div>
+        <div class="hover-coords" id="hover-coords" style="margin-bottom:.5rem;"></div>
+        <div style="width: 100%; height: 120px;">
+          <canvas id="hover-chart"></canvas>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- Carte -->
+  <div style="flex:1;position:relative;">
+    <div id="map" style="width:100%;height:100%;"></div>
+    
+    <!-- Encart Phénomènes (flottant en haut à droite) -->
+    <div id="phenomenes-inset" style="display:none; position:absolute; top:10px; right:10px; width:340px; background:rgba(20,20,25,0.85); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:15px; color:#fff; z-index:1000; box-shadow:0 8px 32px rgba(0,0,0,0.3); font-size:0.85rem; max-height: 80%; overflow-y: auto;">
+      <h4 style="margin-top:0; margin-bottom:10px; font-family:var(--font-head); font-size:1.1rem; color:var(--c-primary); border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:5px;">
+        Impacts Critiques <span id="phenomenes-gwl" style="font-size:0.8rem; background:var(--c-primary); color:white; padding:2px 6px; border-radius:4px; margin-left:5px;"></span>
+      </h4>
+      <div id="phenomenes-content" style="display:flex; flex-direction:column; gap:10px;">
+        <!-- Injecté via JS -->
+      </div>
+    </div>
+
+    <div class="map-loading" id="map-loading">Chargement...</div>
+  </div>
+
+</div>
+
+<script>
+  window.CARTE_CONFIG = {
+    annees: {{ annees_disponibles | tojson }},
+    anneeDefaut: "1990",
+    labels: {{ meta.labels | tojson }},
+    scenarios: { REF: "#2e7d9e", GWL15: "#f0a500", GWL20: "#e07030", GWL30: "#c0392b" }
+  };
+</script>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/carte.js') }}?v=39"></script>
+{% endblock %}

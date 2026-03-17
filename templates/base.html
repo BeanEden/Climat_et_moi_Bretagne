@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Climat & Moi Bretagne{% endblock %}</title>
+
+  <!-- Leaflet (carte) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <!-- Fonts -->
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}?v=9">
+  {% block head %}{% endblock %}
+</head>
+
+<body>
+
+  <!-- Sidebar navigation -->
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="sidebar-logo">
+      <div class="sidebar-title">
+        <img src="{{ url_for('static', filename='titre.png') }}" alt="Climat & Moi Bretagne" style="max-width: 130px; height: auto;">
+      </div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <ul class="sidebar-nav">
+      <li>
+        <a href="{{ url_for('evolution') }}" class="nav-link {% if page == 'evolution' %}active{% endif %}">
+          <span class="nav-icon">&#9650;</span>
+          <span>Evolution</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('statistiques') }}" class="nav-link {% if page == 'statistiques' %}active{% endif %}">
+          <span class="nav-icon">&#9636;</span>
+          <span>Statistiques</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('carte') }}" class="nav-link {% if page == 'carte' %}active{% endif %}">
+          <span class="nav-icon">&#9685;</span>
+          <span>Carte DRIAS</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('recommandations') }}" class="nav-link {% if page == 'recommandations' %}active{% endif %}">
+          <span class="nav-icon">&#9733;</span>
+          <span>Recommandations</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('comparateur') }}" class="nav-link {% if page == 'comparateur' %}active{% endif %}">
+          <span class="nav-icon">&#9878;</span>
+          <span>Comparateur</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('predictions') }}" class="nav-link {% if page == 'predictions' %}active{% endif %}">
+          <span class="nav-icon">&#128200;</span>
+          <span>Prédictions ML</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('carte_ml') }}" class="nav-link {% if page == 'carte_ml' %}active{% endif %}">
+          <span class="nav-icon">&#128506;</span>
+          <span>Carte ML</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <span>TRACC2023 · MF-DCSC</span>
+      <span>CCLM4-8-17 / MPI-ESM</span>
+    </div>
+  </nav>
+
+  <!-- Contenu principal -->
+  <main class="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Leaflet.heat -->
+  <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+
+  <!-- MISTRAL CHATBOT WIDGET -->
+  <div id="mistral-chatbot-container" class="chatbot-container closed">
+    <div class="chatbot-header">
+      <div class="chatbot-title">
+        <span class="chatbot-icon">🤖</span>
+        <span>Assistant Climat</span>
+      </div>
+      <button id="chatbot-close-btn" class="chatbot-icon-btn">✖</button>
+    </div>
+    <div id="chatbot-messages" class="chatbot-messages">
+      <div class="chat-message bot">
+        <div class="chat-bubble">Bonjour ! Je suis Llama, votre assistant IA Expert en Climat. Posez-moi vos questions !</div>
+      </div>
+    </div>
+    <div class="chatbot-input-area">
+      <input type="text" id="chatbot-input" placeholder="Posez votre question..." autocomplete="off">
+      <button id="chatbot-send-btn">Envoyer</button>
+    </div>
+  </div>
+  
+  <button id="chatbot-toggle-btn" class="chatbot-toggle-btn" title="Discuter avec l'assistant Climat">
+    💬
+  </button>
+
+  <script src="{{ url_for('static', filename='js/chatbot.js') }}?v=2"></script>
+  {% block scripts %}{% endblock %}
+</body>
+
+</html>
