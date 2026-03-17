@@ -1,0 +1,46 @@
+Indicateur,Hypothese,R2,RMSE,MAE,Biais
+TempÃ©rature moyenne annuelle (Â°C),optimiste,-1.9288,0.9753,0.8355,-0.81
+TempÃ©rature moyenne annuelle (Â°C),reguliere,-2.1987,1.0843,0.9761,-0.9247
+TempÃ©rature moyenne annuelle (Â°C),pessimiste,-0.263,0.7567,0.5966,-0.4047
+TempÃ©rature moyenne Ã©tÃ© (Â°C),optimiste,-0.0768,1.1628,0.9548,-0.3728
+TempÃ©rature moyenne Ã©tÃ© (Â°C),reguliere,-0.6033,1.2312,1.0773,-0.7601
+TempÃ©rature moyenne Ã©tÃ© (Â°C),pessimiste,-0.0291,1.2711,0.9041,-0.3857
+TempÃ©rature moyenne hiver (Â°C),optimiste,-3.058,1.9893,1.7548,-1.7319
+TempÃ©rature moyenne hiver (Â°C),reguliere,-2.2278,1.7081,1.4866,-1.4053
+TempÃ©rature moyenne hiver (Â°C),pessimiste,-0.3754,1.1561,0.9098,-0.5562
+TempÃ©rature maximale Ã©tÃ© (Â°C),optimiste,-0.0101,1.488,1.2211,-0.2445
+TempÃ©rature maximale Ã©tÃ© (Â°C),reguliere,-0.3627,1.5122,1.3604,-0.7645
+TempÃ©rature maximale Ã©tÃ© (Â°C),pessimiste,-0.0165,1.6708,1.1957,-0.4096
+Jours Tx >= 35Â°C (j),optimiste,-0.032,1.3573,0.8081,-0.2962
+Jours Tx >= 35Â°C (j),reguliere,-0.1597,2.2757,1.522,-0.8548
+Jours Tx >= 35Â°C (j),pessimiste,-0.0137,4.786,3.3956,-0.6352
+Jours Tx >= 30Â°C (j),optimiste,-0.0071,5.3247,4.1307,0.2577
+Jours Tx >= 30Â°C (j),reguliere,-0.1324,7.3572,5.7664,-2.5141
+Jours Tx >= 30Â°C (j),pessimiste,-0.0211,10.7891,7.9659,-1.6687
+Nuits tropicales (j),optimiste,-0.0381,3.3377,2.2106,-0.7691
+Nuits tropicales (j),reguliere,-0.1903,4.8302,3.4897,-1.9612
+Nuits tropicales (j),pessimiste,-0.0072,8.8049,5.9108,-1.3476
+PrÃ©cipitations annuelles (mm),optimiste,-0.0281,159.6584,124.5185,-25.6369
+PrÃ©cipitations annuelles (mm),reguliere,-0.0008,140.8591,117.5788,1.8095
+PrÃ©cipitations annuelles (mm),pessimiste,0.0031,170.0633,147.2035,-4.6716
+PrÃ©cipitations Ã©tÃ© (mm),optimiste,-0.2348,41.8139,31.2228,-16.8319
+PrÃ©cipitations Ã©tÃ© (mm),reguliere,-0.0079,33.9208,25.1598,-6.9268
+PrÃ©cipitations Ã©tÃ© (mm),pessimiste,0.0051,38.2306,31.6903,0.7448
+PrÃ©cipitations hiver (mm),optimiste,-0.0659,75.3927,60.0361,-19.0711
+PrÃ©cipitations hiver (mm),reguliere,-0.0296,97.8613,83.5154,-16.0668
+PrÃ©cipitations hiver (mm),pessimiste,0.0243,70.7316,58.6131,-9.6144
+PrÃ©cip. remarquables P99 (mm),optimiste,-0.8475,3.3328,2.8505,-2.226
+PrÃ©cip. remarquables P99 (mm),reguliere,-0.2459,3.1023,2.71,-1.4394
+PrÃ©cip. remarquables P99 (mm),pessimiste,-0.0818,3.6372,2.9488,-0.7909
+PrÃ©cip. extrÃªmes max annuel (mm),optimiste,-0.4308,5.1179,3.7149,-2.9542
+PrÃ©cip. extrÃªmes max annuel (mm),reguliere,-0.2145,4.717,3.7699,-2.0595
+PrÃ©cip. extrÃªmes max annuel (mm),pessimiste,-0.0421,7.547,6.393,-1.265
+FrÃ©quence prÃ©cip. remarquables (j),optimiste,-0.8261,1.9414,1.6076,-1.2862
+FrÃ©quence prÃ©cip. remarquables (j),reguliere,-0.2339,1.8583,1.5332,-0.8509
+FrÃ©quence prÃ©cip. remarquables (j),pessimiste,-0.0726,2.2864,1.8069,-0.4584
+Indicateur feux mÃ©tÃ©o > 40 (j),optimiste,-159.0817,16.9402,15.8968,15.8968
+Indicateur feux mÃ©tÃ©o > 40 (j),reguliere,-149.6558,23.3255,21.3779,21.3779
+Indicateur feux mÃ©tÃ©o > 40 (j),pessimiste,-8.5524,21.9046,17.5916,15.4569
+Jours SWI < 0.4 (j),optimiste,-0.0005,33.6894,27.2324,-0.864
+Jours SWI < 0.4 (j),reguliere,-0.0863,29.8933,24.6462,-7.2332
+Jours SWI < 0.4 (j),pessimiste,0.0133,24.7526,20.8323,-2.8427

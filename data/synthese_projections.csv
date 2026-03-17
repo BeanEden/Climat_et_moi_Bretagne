@@ -1,0 +1,46 @@
+Indicateur,Label,Hypothese,Modele,REF_mean,Proj_2050,Proj_2100,Delta_2050,Delta_2100,Drift
+TMm_yr,TempÃ©rature moyenne annuelle (Â°C),optimiste,GradientBoosting,11.2717,11.5361,12.2931,0.2644,1.0214,1.4232
+TMm_yr,TempÃ©rature moyenne annuelle (Â°C),reguliere,GradientBoosting,11.2717,11.9267,13.1276,0.655,1.8559,2.2577
+TMm_yr,TempÃ©rature moyenne annuelle (Â°C),pessimiste,GradientBoosting,11.2717,12.4185,14.1782,1.1468,2.9065,3.3083
+TMm_seas_JJA,TempÃ©rature moyenne Ã©tÃ© (Â°C),optimiste,SVR_RBF,17.1719,17.8674,18.2158,0.6955,1.0439,0.655
+TMm_seas_JJA,TempÃ©rature moyenne Ã©tÃ© (Â°C),reguliere,SVR_RBF,17.1719,18.4296,19.4168,1.2577,2.2449,1.8559
+TMm_seas_JJA,TempÃ©rature moyenne Ã©tÃ© (Â°C),pessimiste,SVR_RBF,17.1719,19.0368,20.7139,1.8649,3.542,3.1531
+TMm_seas_DJF,TempÃ©rature moyenne hiver (Â°C),optimiste,RandomForest,5.8384,5.3507,6.9693,-0.4876,1.131,3.0429
+TMm_seas_DJF,TempÃ©rature moyenne hiver (Â°C),reguliere,RandomForest,5.8384,5.5324,7.3575,-0.3059,1.5192,3.4311
+TMm_seas_DJF,TempÃ©rature moyenne hiver (Â°C),pessimiste,RandomForest,5.8384,6.0543,8.4724,0.216,2.6341,4.5461
+TXm_seas_JJA,TempÃ©rature maximale Ã©tÃ© (Â°C),optimiste,SVR_RBF,21.2678,21.9838,22.2123,0.716,0.9445,0.4295
+TXm_seas_JJA,TempÃ©rature maximale Ã©tÃ© (Â°C),reguliere,SVR_RBF,21.2678,22.6565,23.6494,1.3887,2.3816,1.8667
+TXm_seas_JJA,TempÃ©rature maximale Ã©tÃ© (Â°C),pessimiste,SVR_RBF,21.2678,23.35,25.1309,2.0822,3.8631,3.3481
+TX35D_yr,Jours Tx >= 35Â°C (j),optimiste,RandomForest,0.2186,0.5197,0.7966,0.3012,0.578,0.5205
+TX35D_yr,Jours Tx >= 35Â°C (j),reguliere,RandomForest,0.2186,1.253,2.3631,1.0345,2.1446,2.087
+TX35D_yr,Jours Tx >= 35Â°C (j),pessimiste,RandomForest,0.2186,2.7066,5.4684,2.488,5.2499,5.1923
+TX30D_yr,Jours Tx >= 30Â°C (j),optimiste,RandomForest,2.8223,5.7933,5.5525,2.971,2.7302,-0.4528
+TX30D_yr,Jours Tx >= 30Â°C (j),reguliere,RandomForest,2.8223,8.8786,12.1437,6.0563,9.3214,6.1384
+TX30D_yr,Jours Tx >= 30Â°C (j),pessimiste,RandomForest,2.8223,12.3897,19.6447,9.5674,16.8224,13.6395
+TR_yr,Nuits tropicales (j),optimiste,RandomForest,0.5146,1.7035,2.4223,1.1889,1.9077,1.3514
+TR_yr,Nuits tropicales (j),reguliere,RandomForest,0.5146,3.3123,5.8594,2.7978,5.3448,4.7885
+TR_yr,Nuits tropicales (j),pessimiste,RandomForest,0.5146,6.2271,12.0864,5.7125,11.5718,11.0155
+RR_yr,PrÃ©cipitations annuelles (mm),optimiste,SVR_RBF,901.2726,926.6513,950.611,25.3787,49.3384,45.0443
+RR_yr,PrÃ©cipitations annuelles (mm),reguliere,SVR_RBF,901.2726,903.4987,901.1487,2.2261,-0.1239,-4.418
+RR_yr,PrÃ©cipitations annuelles (mm),pessimiste,SVR_RBF,901.2726,923.4407,943.752,22.168,42.4793,38.1853
+RR_seas_JJA,PrÃ©cipitations Ã©tÃ© (mm),optimiste,RandomForest,147.0592,106.9933,122.7241,-40.0659,-24.3351,29.5739
+RR_seas_JJA,PrÃ©cipitations Ã©tÃ© (mm),reguliere,RandomForest,147.0592,101.0666,110.0624,-45.9926,-36.9968,16.9122
+RR_seas_JJA,PrÃ©cipitations Ã©tÃ© (mm),pessimiste,RandomForest,147.0592,90.3006,87.0624,-56.7586,-59.9968,-6.0878
+RR_seas_DJF,PrÃ©cipitations hiver (mm),optimiste,SVR_RBF,293.2738,320.9123,338.7358,27.6385,45.4619,33.5082
+RR_seas_DJF,PrÃ©cipitations hiver (mm),reguliere,SVR_RBF,293.2738,323.5897,344.4557,30.3159,51.1819,39.2281
+RR_seas_DJF,PrÃ©cipitations hiver (mm),pessimiste,SVR_RBF,293.2738,342.0133,383.8152,48.7395,90.5414,78.5876
+RRq99_yr,PrÃ©cip. remarquables P99 (mm),optimiste,RandomForest,22.8391,22.5585,24.6389,-0.2805,1.7999,3.9111
+RRq99_yr,PrÃ©cip. remarquables P99 (mm),reguliere,RandomForest,22.8391,22.3728,24.2422,-0.4662,1.4032,3.5145
+RRq99_yr,PrÃ©cip. remarquables P99 (mm),pessimiste,RandomForest,22.8391,23.7538,27.1925,0.9148,4.3534,6.4647
+Rx1d_yr,PrÃ©cip. extrÃªmes max annuel (mm),optimiste,RandomForest,38.0889,35.8539,38.6148,-2.235,0.5259,5.1905
+Rx1d_yr,PrÃ©cip. extrÃªmes max annuel (mm),reguliere,RandomForest,38.0889,35.778,38.4527,-2.3109,0.3638,5.0284
+Rx1d_yr,PrÃ©cip. extrÃªmes max annuel (mm),pessimiste,RandomForest,38.0889,38.2642,43.7641,0.1753,5.6752,10.3398
+RRq99refD_yr,FrÃ©quence prÃ©cip. remarquables (j),optimiste,RandomForest,3.6478,3.8028,5.0048,0.155,1.357,2.2598
+RRq99refD_yr,FrÃ©quence prÃ©cip. remarquables (j),reguliere,RandomForest,3.6478,3.7175,4.8225,0.0697,1.1748,2.0775
+RRq99refD_yr,FrÃ©quence prÃ©cip. remarquables (j),pessimiste,RandomForest,3.6478,4.499,6.4921,0.8512,2.8444,3.7471
+IFM40_yr,Indicateur feux mÃ©tÃ©o > 40 (j),optimiste,HuberReg,0.7821,19.9915,151.2211,19.2094,150.4391,-27.9309
+IFM40_yr,Indicateur feux mÃ©tÃ©o > 40 (j),reguliere,HuberReg,0.7821,8.6337,126.9568,7.8516,126.1747,-52.1953
+IFM40_yr,Indicateur feux mÃ©tÃ©o > 40 (j),pessimiste,HuberReg,0.7821,-26.074,52.8085,-26.8561,52.0264,-126.3436
+SWI04_yr,Jours SWI < 0.4 (j),optimiste,SVR_RBF,122.8384,123.9362,124.7436,1.0978,1.9052,1.518
+SWI04_yr,Jours SWI < 0.4 (j),reguliere,SVR_RBF,122.8384,131.4921,140.8858,8.6537,18.0474,17.6602
+SWI04_yr,Jours SWI < 0.4 (j),pessimiste,SVR_RBF,122.8384,134.102,146.4615,11.2636,23.6231,23.2359
