@@ -60,6 +60,7 @@ Le site web a été conçu comme un **Dashboard Moderne** clair, accueillant, et
 
 ### 1. La Carte Interactive (Point d'Entrée)
 L'utilisateur découvre d'abord les conséquences géographiques spatialisées du changement climatique en Bretagne à travers une heatmap interactive. Il peut sélectionner différents indicateurs (températures, précipitations) et observer l'évolution spatiale des anomalies climatiques.
+> ![Carte Machine Learning](static/images/carte_ml.png)
 
 ### 2. Les Recommandations Personnalisées
 En saisissant son adresse, l'utilisateur a accès aux fameux "Réflexes", aux gestes du quotidien, et à un aperçu numérique du flyer. Cela permet de lier directement les données climatiques à des actions citoyennes concrètes et priorisées.
@@ -80,8 +81,8 @@ Pour un public plus aguerri, analyse des dispersions sous formes d'histogrammes 
 
 ### 6. Assistant Climat & Fonctionnalités ML
 > ![Assistant Chatbot](static/images/chat.png)
-> ![Carte Machine Learning](static/images/carte_ml.png)
-> ![Prédictions ML](static/images/pr%C3%A9dictions%20ML.png)
+
+
 ---
 
 ## Le Modèle de Machine Learning
@@ -89,6 +90,7 @@ Pour un public plus aguerri, analyse des dispersions sous formes d'histogrammes 
 Outre la visualisation web, le projet embarque un volet expérimental de modélisation mathématique via `tracc_prediction.ipynb`.
 Ce carnet de recherche implémente des approches algorithmiques pour analyser et extraire des tendances sur les données `tracc`.
 Il vise à prédire l'évolution des indicateurs climatiques jusqu'en 2100 en tenant compte des contraintes temporelles et spatiales de la région Bretagne. L'exploration a mis en évidence des corrélations fortes, permettant de valider des modèles de régression robustes (évalués via R2 et analyse des résidus) avant d'extrapoler les projections.
+
 
 ### Prédictions et Résultats du Modèle
 Voici les visuels issus de nos expérimentations de machine learning détaillées dans le notebook.
