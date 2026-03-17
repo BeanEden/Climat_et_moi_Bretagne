@@ -1,12 +1,12 @@
 # Climat & Moi - Bretagne (Plateforme de Sensibilisation Régionale)
 
-## 🌍 Présentation du Projet
+## Présentation du Projet
 Ce projet est une solution complète de sensibilisation aux enjeux climatiques régionaux, pensée prioritairement pour les citoyens. 
 Le parcours utilisateur débute dans le monde physique grâce à un **Flyer de sensibilisation** (disponible dans `static/flyer.pdf`) distribué à la population. Ce support synthétique et percutant invite ensuite l'utilisateur à se rendre sur cette plateforme web interactive (`flask_app`) pour approfondir ses connaissances, explorer les données locales et découvrir précisément ses propres impacts et recommandations de vie (réflexes d'urgence, gestes du quotidien).
 
 ---
 
-## 🏗️ Architecture de l'Application
+## Architecture de l'Application
 
 La totalité de la plateforme réside dans l'environnement `flask_app` :
 
@@ -45,7 +45,7 @@ flask_app/
 
 ---
 
-## 📊 Les Données de Base
+## Les Données de Base
 
 L'application s'appuie sur plusieurs sources intégrées :
 *   **Données Climatiques (TRACC - Météo-France) :** Un ensemble de variables climatiques de haute définition régionalisées (ex: Température moyenne, Jours sans pluie, Cumul de précipitations). Ces données sont réparties entre les séries macroscopiques (`tracc_data.json`) et la finesse territoriale (`tracc_spatial.json`).
@@ -54,21 +54,21 @@ L'application s'appuie sur plusieurs sources intégrées :
 
 ---
 
-## 💻 Le Site Web : Parcours Utilisateur
+## Le Site Web : Parcours Utilisateur
 
 Le site web a été conçu comme un **Dashboard Moderne** clair, accueillant, et dont la typographie met à l'aise le grand public tout en conservant la rigueur scientifique des données.
 
 ### 1. La Carte Interactive (Point d'Entrée)
-L'utilisateur découvre d'abord les conséquences géographiques spatialisées du changement climatique en Bretagne.
+L'utilisateur découvre d'abord les conséquences géographiques spatialisées du changement climatique en Bretagne à travers une heatmap interactive. Il peut sélectionner différents indicateurs (températures, précipitations) et observer l'évolution spatiale des anomalies climatiques.
 
 ### 2. Les Recommandations Personnalisées
-En saisissant son adresse, l'utilisateur a accès aux fameux "Réflexes", aux gestes du quotidien, et à un aperçu numérique du flyer.
+En saisissant son adresse, l'utilisateur a accès aux fameux "Réflexes", aux gestes du quotidien, et à un aperçu numérique du flyer. Cela permet de lier directement les données climatiques à des actions citoyennes concrètes et priorisées.
 > ![Recommandations Reflexes](static/images/recommandation%20reflexes.png)
 > ![Recommandations Engagements](static/images/recommandation%20engagements.png)
 > ![Recommandations Flyer](static/images/recommandation%20flyer.png)
 
 ### 3. Le Comparateur Climatique
-L'utilisateur peut comparer frontalement des périodes ("les années 1990" face aux "années 2050") à travers des diagrammes RADAR normalisés et des courbes.
+L'utilisateur peut comparer frontalement des périodes ("les années 1990" face aux "années 2050") à travers des diagrammes RADAR normalisés et des courbes. Cette vue quantifie précisément l'évolution relative et absolue de l'empreinte climatique entre deux époques.
 > ![Comparatif Année](static/images/comparatif%20ann%C3%A9e.png)
 > ![Comparatif Période](static/images/comparatif%20p%C3%A9riode.png)
 
@@ -84,13 +84,14 @@ Pour un public plus aguerri, analyse des dispersions sous formes d'histogrammes 
 > ![Prédictions ML](static/images/pr%C3%A9dictions%20ML.png)
 ---
 
-## 🤖 Le Modèle de Machine Learning
+## Le Modèle de Machine Learning
 
 Outre la visualisation web, le projet embarque un volet expérimental de modélisation mathématique via `tracc_prediction.ipynb`.
 Ce carnet de recherche implémente des approches algorithmiques pour analyser et extraire des tendances sur les données `tracc`.
+Il vise à prédire l'évolution des indicateurs climatiques jusqu'en 2100 en tenant compte des contraintes temporelles et spatiales de la région Bretagne. L'exploration a mis en évidence des corrélations fortes, permettant de valider des modèles de régression robustes (évalués via R2 et analyse des résidus) avant d'extrapoler les projections.
 
 ### Prédictions et Résultats du Modèle
-Voici les visuels issus de nos expérimentations de machine learning sur les indicateurs d'intérêts pour la région.
+Voici les visuels issus de nos expérimentations de machine learning détaillées dans le notebook.
 
 > ![EDA Corrélation](data/predictions/images/eda_correlation.png)
 > ![EDA Séries Temporelles](data/predictions/images/eda_series_temporelles.png)
@@ -102,7 +103,7 @@ Voici les visuels issus de nos expérimentations de machine learning sur les ind
 
 ---
 
-## 🚀 Lancement Rapide (Dev)
+## Lancement Rapide (Dev)
 
 Pour instancier et exécuter l'application localement :
 
